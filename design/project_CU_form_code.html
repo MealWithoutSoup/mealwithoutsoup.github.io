@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Project - E-Commerce Optimization</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1c2630",
+                        "border-light": "#e7edf3",
+                        "border-dark": "#2a3642",
+                        "text-primary-light": "#0d141b",
+                        "text-primary-dark": "#ffffff",
+                        "text-secondary-light": "#4c739a",
+                        "text-secondary-dark": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark antialiased overflow-x-hidden min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark px-6 py-3 shadow-sm">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between w-full">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+                    Portfolio Admin
+                </h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-8">
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary font-medium text-sm transition-colors" href="#">Dashboard</a>
+<a class="text-primary font-medium text-sm transition-colors" href="#">Projects</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary font-medium text-sm transition-colors" href="#">Settings</a>
+</div>
+<button aria-label="Toggle Dark Mode" class="flex items-center justify-center p-2 rounded-full hover:bg-border-light dark:hover:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined block dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block">light_mode</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs border border-primary/20">
+                    JD
+                </div>
+</nav>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center w-full py-8 md:py-12 px-4 md:px-0">
+<div class="w-full max-w-[960px] flex flex-col gap-8">
+<nav aria-label="Breadcrumb">
+<div class="flex flex-wrap items-center gap-2 text-sm">
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors" href="#">Admin</a>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">/</span>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors" href="#">Projects</a>
+<span class="text-text-secondary-light dark:text-text-secondary-dark">/</span>
+<span class="font-medium text-primary">Edit Project</span>
+</div>
+</nav>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-border-light dark:border-border-dark pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-black tracking-tight leading-[1.1]">Edit Project Details</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal">
+                        Update general project information, tech stack, and detailed problem analysis.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark font-semibold text-sm hover:border-text-secondary-light dark:hover:border-text-secondary-dark transition-colors">
+                        Cancel
+                    </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-white font-semibold text-sm shadow-sm hover:bg-primary/90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Save Changes
+                    </button>
+</div>
+</div>
+<form class="flex flex-col gap-10 mt-2" onsubmit="event.preventDefault();">
+<section>
+<h3 class="text-sm font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">info</span>
+                        General Information
+                    </h3>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-6 md:p-8 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="project-title">Project Title</label>
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-lg font-bold text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" id="project-title" placeholder="e.g. E-Commerce Optimization" type="text" value="E-Commerce Optimization"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark">Tech Stack</label>
+<div class="flex flex-wrap items-center gap-2 p-3 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all min-h-[56px]">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
+                                    React
+                                    <button class="ml-2 inline-flex items-center justify-center text-primary/60 hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
+                                    Node.js
+                                    <button class="ml-2 inline-flex items-center justify-center text-primary/60 hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
+                                    Redis
+                                    <button class="ml-2 inline-flex items-center justify-center text-primary/60 hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</span>
+<input class="flex-1 bg-transparent border-none outline-none text-sm px-2 py-1 placeholder-text-secondary-dark/50 text-text-primary-light dark:text-text-primary-dark" placeholder="Add technology tag..." type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="github-url">GitHub Repository URL</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-text-secondary-dark">code</span>
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg pl-10 pr-4 py-2.5 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" id="github-url" placeholder="https://github.com/username/repo" type="url" value="https://github.com/jdoe/ecommerce-opt"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="deploy-url">Deployment URL</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-text-secondary-dark">rocket_launch</span>
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg pl-10 pr-4 py-2.5 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" id="deploy-url" placeholder="https://project-demo.com" type="url" value="https://shop-demo.vercel.app"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="project-desc">Project Description</label>
+<textarea class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-base leading-relaxed text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50 min-h-[140px]" id="project-desc" placeholder="Detailed project overview..." rows="5">This project involved re-architecting the backend of a legacy e-commerce platform to handle Black Friday traffic loads. The goal was to minimize latency and ensure 99.99% uptime during peak sales periods.</textarea>
+</div>
+</div>
+</section>
+<hr class="border-t border-border-light dark:border-border-dark"/>
+<section class="flex flex-col gap-8">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<h3 class="text-sm font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">psychology</span>
+                        Key Technical Challenge
+                    </h3>
+<button class="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20 transition-all border border-red-100 dark:border-red-900/30 hover:border-red-200 dark:hover:border-red-800 focus:outline-none focus:ring-2 focus:ring-red-500/20" title="Remove this problem section" type="button">
+<span class="material-symbols-outlined text-[18px] group-hover:scale-110 transition-transform">delete</span>
+                        Delete Problem
+                    </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl overflow-hidden shadow-sm border border-border-light dark:border-border-dark border-l-4 border-l-primary p-6 md:p-8 relative">
+<div class="flex flex-col gap-6 relative z-10">
+<div class="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-wider">
+<span class="material-symbols-outlined text-lg">flag</span>
+                                Core Problem
+                            </div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="problem-title">Problem Title</label>
+<input class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-lg font-bold text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" id="problem-title" placeholder="Enter a concise title for the problem..." type="text" value="High Latency in Review Retrieval"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark" for="problem-desc">Problem Description</label>
+<textarea class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-base leading-relaxed text-text-secondary-light dark:text-text-secondary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-y placeholder-text-secondary-dark/50" id="problem-desc" placeholder="Summarize the problem context, impact, and high-level outcome..." rows="3">When retrieving review posts, slow response times were occurring during peak traffic. By implementing local caching strategies and optimizing database queries, response latency was improved significantly from 350ms to 20ms.</textarea>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">hub</span>
+                            Technical Diagrams
+                        </h3>
+<div class="w-full">
+<div class="bg-card-light dark:bg-card-dark w-full rounded-lg border-2 border-dashed border-border-light dark:border-border-dark flex flex-col items-center justify-center relative overflow-hidden transition-all hover:border-primary/50 group p-2">
+<div class="relative w-full aspect-video rounded overflow-hidden bg-background-light dark:bg-background-dark">
+<img alt="Current Diagram" class="w-full h-full object-cover opacity-50 group-hover:opacity-30 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBClRpJWQDcNI_OU5Q9NrEQYYM37W3gZ-oBRz_AoyfeOpTJ5vpTo8TBO9VQ5Bd6HgStHdEIVc7dlnPeS2WolSMa9wAv1AC00S1Yn5ZT3OhP9wCVvSKq_wIVBzKSBkI2q9oNLWqLKyuq0YlA-vw1Ov8KDYNxEvFT9L4A-MC2VcxHgFZCWA2OBEzgHz7cQYBZyELYIOd6k6giMfkIXx3hj1FoqE6WYy6ffqKdLIC83dbHDTn9E_24aOgj7aCmiX1CWh800Pm3J5UUmerL"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-4 z-10">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">cloud_upload</span>
+</div>
+<div class="text-center">
+<p class="text-sm font-bold text-text-primary-light dark:text-text-primary-dark">Drag and drop or click to replace</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-1">SVG, PNG, JPG or GIF (max. 20MB)</p>
+</div>
+<button class="mt-2 px-4 py-2 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded shadow-sm text-xs font-bold uppercase tracking-wider text-primary hover:bg-background-light dark:hover:bg-background-dark transition-colors" type="button">
+                                            Select File
+                                        </button>
+</div>
+</div>
+<input accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file"/>
+</div>
+<p class="text-xs text-text-secondary-dark mt-2">Recommended size: 1920x1080px. High contrast diagrams work best.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 mt-2">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500 text-xl">error</span>
+                                    Problem Cause
+                                </h3>
+<span class="text-xs font-mono text-text-secondary-dark bg-card-light dark:bg-card-dark px-2 py-1 rounded border border-border-light dark:border-border-dark">List Items</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a cause..." type="text" value="The initial implementation used a synchronous database call for every review view request, causing blocking I/O."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a cause..." type="text" value="Lack of indexing on the review_timestamp column resulted in full table scans during sort operations."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a cause..." type="text" value="High traffic spikes during sales events overwhelmed the primary database connection pool."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<button class="flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors mt-1 px-1 w-fit" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                    Add Another Cause
+                                </button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">build</span>
+                                    Solution Process
+                                </h3>
+<span class="text-xs font-mono text-text-secondary-dark bg-card-light dark:bg-card-dark px-2 py-1 rounded border border-border-light dark:border-border-dark">List Items</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a step..." type="text" value="Identified bottleneck using slow query logs and Application Performance Monitoring (APM) tools."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a step..." type="text" value="Implemented a Write-Through caching strategy using Redis to serve frequent read requests from memory."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe a step..." type="text" value="Optimized SQL queries by adding composite indexes covering filter and sort columns."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<button class="flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors mt-1 px-1 w-fit" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                    Add Another Step
+                                </button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-xl">check_circle</span>
+                                    Result
+                                </h3>
+<span class="text-xs font-mono text-text-secondary-dark bg-card-light dark:bg-card-dark px-2 py-1 rounded border border-border-light dark:border-border-dark">List Items</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe an outcome..." type="text" value="94% reduction in average API response time (350ms → 20ms)."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe an outcome..." type="text" value="Database CPU utilization dropped by 40% during peak load testing."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="flex items-start gap-2 group">
+<div class="flex-grow relative">
+<input class="w-full bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg pl-4 pr-10 py-3 text-base text-text-primary-light dark:text-text-primary-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-text-secondary-dark/50" placeholder="Describe an outcome..." type="text" value="Successfully handled 3x increase in concurrent users without degradation."/>
+</div>
+<button class="flex-shrink-0 p-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Remove item" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<button class="flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors mt-1 px-1 w-fit" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                    Add Another Result
+                                </button>
+</div>
+</div>
+</div>
+<button class="w-full py-5 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary bg-primary/5 hover:bg-primary/10 transition-all flex flex-col items-center justify-center gap-2 group mt-4 outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark" type="button">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="font-bold text-primary group-hover:underline decoration-2 underline-offset-4 decoration-transparent group-hover:decoration-primary transition-all">Add New Problem</span>
+</button>
+</section>
+<div class="w-full flex justify-end gap-4 pt-8 border-t border-border-light dark:border-border-dark mt-4 sticky bottom-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 -mx-4 md:mx-0 md:p-0 md:static md:bg-transparent">
+<button class="px-6 py-3 rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-text-secondary-light dark:text-text-secondary-dark font-bold hover:border-text-secondary-light dark:hover:border-text-secondary-dark transition-colors w-full md:w-auto">
+                        Cancel
+                    </button>
+<button class="px-6 py-3 rounded-lg bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 w-full md:w-auto">
+<span class="material-symbols-outlined">save</span>
+                        Save All Changes
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<footer class="w-full bg-card-light dark:bg-card-dark border-t border-border-light dark:border-border-dark py-8 mt-12">
+<div class="max-w-[960px] mx-auto px-4 flex justify-between items-center text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<p>© 2024 Portfolio Admin. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+</div>
+</div>
+</footer>
+</body></html>

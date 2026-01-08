@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Landing Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#137fec",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+                },
+                fontFamily: {
+                "display": ["Inter", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
+<style>details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<main class="w-full lg:w-[70%] max-w-5xl mx-auto flex-grow flex flex-col px-6 py-12 md:py-16 gap-12">
+<header class="flex flex-col gap-6">
+<div class="flex justify-end w-full">
+<button class="p-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-primary hover:border-primary transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+</div>
+</header>
+<section class="flex flex-col gap-4">
+<div class="relative w-full max-w-2xl">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border border-slate-200 dark:border-slate-700 rounded-xl leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-lg shadow-sm" placeholder="Search projects, labs, or technologies..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-2 text-sm">
+<span class="text-slate-500 dark:text-slate-400 font-medium mr-1">Trending:</span>
+<button class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary rounded-full transition-colors text-slate-600 dark:text-slate-300">React</button>
+<button class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary rounded-full transition-colors text-slate-600 dark:text-slate-300">TypeScript</button>
+<button class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary rounded-full transition-colors text-slate-600 dark:text-slate-300">Design Systems</button>
+<button class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary rounded-full transition-colors text-slate-600 dark:text-slate-300">D3.js</button>
+<button class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary rounded-full transition-colors text-slate-600 dark:text-slate-300">UI/UX</button>
+</div>
+</section>
+<section class="flex flex-col gap-8">
+<div class="flex items-center gap-3 pb-2 border-b border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-primary">star</span>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Featured Work</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<article class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:border-primary/50 transition-all duration-300">
+<div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-900">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Dashboard interface with data charts" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2GUxxxKajov5_tRIbGNR-Xc_XMPJWCRO3ZvtxzrvTbwLQZlGZJ6BL-uFUd66fxXynFSI0VoEA03UdJS8IgoJGwUjMaFa1VksowVLzW450f89gS4GS_2mW45MxECfMYfpR3uEo2YIxVx5uJucyywM2vVd27hUqXruaqbkqDNlk_R2kgJi1KLFWEHc6EN2J_w9R9_1y0VM9OkWwHj_bls8SPTM0TYVM18kWLz5BLt-ht3t3Ne92BUnlT8i0Vf6s5LoczgCzFxTG_0A_');">
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-grow">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">FinTech Dashboard</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                A comprehensive financial analytics dashboard designed for enterprise clients, featuring real-time data visualization and intuitive reporting tools.
+                            </p>
+</div>
+<div class="mt-auto flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">React</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">TypeScript</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">D3.js</span>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:border-primary/50 transition-all duration-300">
+<div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-900">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Modern e-commerce mobile app screens" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2-cN_I-9fcubtW0t_ZG0gbFR53PfmMpSzWtwxoP3uvqzVOUuEcQwf2fV5h-9idNNtRKaNke37S6jPdq-T4di4jsiueZoVUmFm6zYByBGkqqT-1OFOtg-lGO7zqIcLPeO-yugtxD7bS3NXpZtxvPniD3S7PxIEpWqaK8ha4NmWFCRGyLrEqOoe1mClPkWeq-jTvO4SLalk3WbO2X3Sk5UFGqivC3HU4V7J4E7r7tXmpYs4jh9RButTkjpBsBq3gDLfbdW5J6cNB7OP');">
+</div>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-grow">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">E-Commerce Mobile App</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                A clean, user-centric mobile shopping experience focusing on simplified checkout flows and personalized product recommendations.
+                            </p>
+</div>
+<div class="mt-auto flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">React Native</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">Redux</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-md">Figma</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<details class="group/accordion">
+<summary class="list-none cursor-pointer">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover/accordion:text-primary transition-colors">folder_open</span>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white group-hover/accordion:text-primary transition-colors">Projects</h2>
+</div>
+<span class="material-symbols-outlined text-slate-400 transform group-open/accordion:rotate-180 transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="pt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<a class="group block bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-md transition-all" href="#">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[24px]">dataset</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">arrow_forward</span>
+</div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Task Manager</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">Productivity tool for small teams with real-time sync.</p>
+<div class="flex gap-2">
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Vue.js</span>
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Firebase</span>
+</div>
+</a>
+<a class="group block bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-md transition-all" href="#">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600">
+<span class="material-symbols-outlined text-[24px]">palette</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">arrow_forward</span>
+</div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Design System</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">A scalable UI kit and component library for SaaS products.</p>
+<div class="flex gap-2">
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Figma</span>
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Storybook</span>
+</div>
+</a>
+<a class="group block bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700 hover:border-primary hover:shadow-md transition-all" href="#">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">arrow_forward</span>
+</div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Shopify Theme</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">Custom minimal theme development for lifestyle brands.</p>
+<div class="flex gap-2">
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">Liquid</span>
+<span class="text-xs font-medium text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">JS</span>
+</div>
+</a>
+</div>
+</details>
+<details class="group/accordion">
+<summary class="list-none cursor-pointer">
+<div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800 hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 group-hover/accordion:text-primary transition-colors">science</span>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white group-hover/accordion:text-primary transition-colors">Labs &amp; Playground</h2>
+</div>
+<span class="material-symbols-outlined text-slate-400 transform group-open/accordion:rotate-180 transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="pt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="h-24 bg-gradient-to-br from-indigo-500 to-purple-500 rounded mb-3 flex items-center justify-center text-white" data-alt="Abstract gradient pattern representing CSS art">
+<span class="material-symbols-outlined text-3xl">brush</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white text-sm">CSS Art: Retro Camera</h4>
+<p class="text-xs text-slate-500 mt-1">Pure CSS illustration.</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="h-24 bg-gradient-to-br from-green-400 to-cyan-500 rounded mb-3 flex items-center justify-center text-white" data-alt="Abstract gradient pattern representing animation">
+<span class="material-symbols-outlined text-3xl">animation</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white text-sm">3D Card Hover</h4>
+<p class="text-xs text-slate-500 mt-1">Perspective transforms.</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="h-24 bg-gradient-to-br from-orange-400 to-red-500 rounded mb-3 flex items-center justify-center text-white" data-alt="Abstract gradient pattern representing algorithm">
+<span class="material-symbols-outlined text-3xl">functions</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white text-sm">Sorting Visualizer</h4>
+<p class="text-xs text-slate-500 mt-1">Bubble sort algo viz.</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-100 dark:border-slate-700 hover:border-primary/30 transition-colors cursor-pointer">
+<div class="h-24 bg-gradient-to-br from-gray-700 to-black rounded mb-3 flex items-center justify-center text-white" data-alt="Abstract gradient pattern representing terminal">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<h4 class="font-semibold text-slate-900 dark:text-white text-sm">CLI Portfolio</h4>
+<p class="text-xs text-slate-500 mt-1">Interactive terminal.</p>
+</div>
+</div>
+</details>
+</main>
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 mt-auto">
+<div class="w-full lg:w-[70%] max-w-5xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-slate-500 dark:text-slate-400">© 2024 Alex Morgan. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Twitter</a>
+<a class="text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Dribbble</a>
+<a class="text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+
+</body></html>

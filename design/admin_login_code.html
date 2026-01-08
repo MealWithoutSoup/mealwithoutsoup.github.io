@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Login Page</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased min-h-screen flex flex-col">
+<!-- Simplified Header -->
+<header class="w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 backdrop-blur-sm px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Admin Console</h2>
+</div>
+<div>
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors" href="#">Help</a>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+<!-- Login Card -->
+<div class="w-full max-w-[480px] bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="p-8 pb-6">
+<!-- Page Heading (Modified) -->
+<div class="flex flex-col gap-2 mb-8 text-center sm:text-left">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome Back</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        Enter your credentials to access the portfolio admin dashboard.
+                    </p>
+</div>
+<!-- Form -->
+<form action="#" class="flex flex-col gap-5" method="POST">
+<!-- Email Field -->
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-900 dark:text-slate-200" for="email">Email Address</label>
+<div class="relative">
+<input autofocus="" class="form-input w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" id="email" placeholder="admin@example.com" required="" type="email"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="text-sm font-medium text-slate-900 dark:text-slate-200" for="password">Password</label>
+</div>
+<div class="flex w-full rounded-lg relative">
+<input class="form-input w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 pr-12" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<div class="flex justify-end mt-1">
+<a class="text-sm font-medium text-primary hover:text-blue-600 hover:underline" href="#">Forgot Password?</a>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full flex items-center justify-center h-12 px-6 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold text-base tracking-wide transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-slate-800">
+                            Sign In
+                        </button>
+</div>
+</form>
+</div>
+<!-- Card Footer Area (Optional for extra links/info) -->
+<div class="px-8 py-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700 text-center">
+<p class="text-xs text-slate-500 dark:text-slate-400">
+                    Restricted Access. Authorized personnel only.
+                 </p>
+</div>
+</div>
+</main>
+<!-- Page Footer -->
+<footer class="py-6 text-center">
+<p class="text-xs text-slate-400 dark:text-slate-600">
+            © 2024 Portfolio Admin System. All rights reserved.
+        </p>
+</footer>
+</body></html>
