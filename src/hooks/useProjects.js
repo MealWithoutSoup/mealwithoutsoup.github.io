@@ -15,6 +15,7 @@ export function useProjects(category = null) {
         let query = supabase
           .from('projects')
           .select('*')
+          .eq('visibility', true)
           .order('start_date', { ascending: false })
 
         if (category) {

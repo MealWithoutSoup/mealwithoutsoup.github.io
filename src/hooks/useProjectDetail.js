@@ -18,7 +18,7 @@ export function useProjectDetail(projectId) {
         setLoading(true)
         setError(null)
 
-        // Fetch project with challenges
+        // Fetch project with challenges (only visible projects)
         const { data, error: fetchError } = await supabase
           .from('projects')
           .select(`
@@ -35,6 +35,7 @@ export function useProjectDetail(projectId) {
             )
           `)
           .eq('id', projectId)
+          .eq('visibility', true)
           .single()
 
         if (fetchError) throw fetchError

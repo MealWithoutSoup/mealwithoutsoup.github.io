@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useProjects } from '../hooks/useProjects'
+import { useDebounce } from '../hooks/useDebounce'
 import { Header } from '../components/layout/Header'
 import { SearchBar } from '../components/ui/SearchBar'
 import { TrendingTags } from '../components/ui/TrendingTags'
@@ -18,12 +20,52 @@ const PROJECT_COLORS = ['blue', 'purple', 'orange', 'green', 'red', 'blue']
 const LAB_ICONS = ['brush', 'animation', 'functions', 'terminal', 'science', 'auto_awesome']
 const LAB_GRADIENTS = ['indigo', 'green', 'orange', 'gray', 'blue', 'pink']
 
+// 필터링 함수
+const filterProjects = (projects, query) => {
+  if (!query.trim()) return projects
+  const q = query.toLowerCase()
+  return projects.filter(p =>
+    p.title?.toLowerCase().includes(q) ||
+    p.proj_description?.toLowerCase().includes(q) ||
+    p.tags?.some(tag => tag.toLowerCase().includes(q))
+  )
+}
+
 export function MainPage() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
+  const debouncedQuery = useDebounce(searchQuery, 300)
 
   const { projects: featuredProjects, loading: featuredLoading } = useProjects('featured')
   const { projects: projects, loading: projectsLoading } = useProjects('projects')
   const { projects: labs, loading: labsLoading } = useProjects('labs')
+
+  // URL 동기화 (디바운스된 값 사용)
+  useEffect(() => {
+    if (debouncedQuery) {
+      setSearchParams({ q: debouncedQuery }, { replace: true })
+    } else {
+      setSearchParams({}, { replace: true })
+    }
+  }, [debouncedQuery, setSearchParams])
+
+  // 필터링된 결과 (즉시 반영)
+  const filteredFeatured = useMemo(
+    () => filterProjects(featuredProjects, searchQuery),
+    [featuredProjects, searchQuery]
+  )
+  const filteredProjects = useMemo(
+    () => filterProjects(projects, searchQuery),
+    [projects, searchQuery]
+  )
+  const filteredLabs = useMemo(
+    () => filterProjects(labs, searchQuery),
+    [labs, searchQuery]
+  )
+
+  // 전체 결과 수
+  const totalResults = filteredFeatured.length + filteredProjects.length + filteredLabs.length
+  const isSearching = searchQuery.trim().length > 0
 
   const handleTagClick = (tag) => {
     setSearchQuery(tag)
@@ -57,11 +99,16 @@ export function MainPage() {
             <div className="flex items-center justify-center py-12">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
             </div>
-          ) : featuredProjects.length > 0 ? (
+          ) : filteredFeatured.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {featuredProjects.map((project) => (
+              {filteredFeatured.map((project) => (
                 <FeaturedCard key={project.id} project={project} />
               ))}
+            </div>
+          ) : isSearching ? (
+            <div className="flex flex-col items-center py-12 text-text-secondary-light dark:text-text-secondary-dark">
+              <Icon name="search_off" className="text-5xl mb-3" />
+              <p>"{searchQuery}"에 대한 Featured 검색 결과가 없습니다</p>
             </div>
           ) : (
             <p className="text-text-secondary-light dark:text-text-secondary-dark text-center py-8">
@@ -77,9 +124,9 @@ export function MainPage() {
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
             </div>
-          ) : projects.length > 0 ? (
+          ) : filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {projects.map((project, index) => (
+              {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
@@ -87,6 +134,11 @@ export function MainPage() {
                   iconColor={PROJECT_COLORS[index % PROJECT_COLORS.length]}
                 />
               ))}
+            </div>
+          ) : isSearching ? (
+            <div className="flex flex-col items-center py-8 text-text-secondary-light dark:text-text-secondary-dark">
+              <Icon name="search_off" className="text-5xl mb-3" />
+              <p>"{searchQuery}"에 대한 Projects 검색 결과가 없습니다</p>
             </div>
           ) : (
             <p className="text-text-secondary-light dark:text-text-secondary-dark text-center py-8">
@@ -103,9 +155,9 @@ export function MainPage() {
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
             </div>
-          ) : labs.length > 0 ? (
+          ) : filteredLabs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {labs.map((lab, index) => (
+              {filteredLabs.map((lab, index) => (
                 <LabCard
                   key={lab.id}
                   project={lab}
@@ -113,6 +165,11 @@ export function MainPage() {
                   gradient={LAB_GRADIENTS[index % LAB_GRADIENTS.length]}
                 />
               ))}
+            </div>
+          ) : isSearching ? (
+            <div className="flex flex-col items-center py-8 text-text-secondary-light dark:text-text-secondary-dark">
+              <Icon name="search_off" className="text-5xl mb-3" />
+              <p>"{searchQuery}"에 대한 Labs 검색 결과가 없습니다</p>
             </div>
           ) : (
             <p className="text-text-secondary-light dark:text-text-secondary-dark text-center py-8">

@@ -16,6 +16,12 @@
   --color-text-secondary-light: #4c739a;
   --color-text-secondary-dark: #94a3b8;
 
+  /* Neumorphic Colors */
+  --color-neu-light: #eef0f2;
+  --color-neu-dark: #1c2630;
+  --color-neu-inset-light: #e4e6e8;
+  --color-neu-inset-dark: #252f3a;
+
   /* Font Family */
   --font-family-display: "Inter", sans-serif;
 
@@ -70,4 +76,35 @@ details[open] summary ~ * {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Neumorphic Card Styles */
+.neumorphic-card {
+  background: var(--color-neu-light);
+  box-shadow: 5px 5px 10px #dce0e3, -5px -5px 10px #ffffff;
+  transition: all 0.3s ease;
+}
+
+.neumorphic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 8px 16px #dce0e3, -8px -8px 16px #ffffff;
+}
+
+html.dark .neumorphic-card {
+  background: var(--color-neu-dark);
+  box-shadow: 5px 5px 10px #161e26, -5px -5px 10px #222e3a;
+}
+
+html.dark .neumorphic-card:hover {
+  box-shadow: 8px 8px 16px #161e26, -8px -8px 16px #222e3a;
+}
+
+.neumorphic-inset {
+  background: var(--color-neu-inset-light);
+  box-shadow: inset 4px 4px 8px #d4d8db, inset -4px -4px 8px #f4f6f8;
+}
+
+html.dark .neumorphic-inset {
+  background: var(--color-neu-inset-dark);
+  box-shadow: inset 4px 4px 8px #1a222b, inset -4px -4px 8px #303c49;
 }
