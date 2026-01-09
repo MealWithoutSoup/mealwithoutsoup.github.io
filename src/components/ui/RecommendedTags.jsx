@@ -1,8 +1,8 @@
-export function TrendingTags({ tags, onTagClick }) {
+export function RecommendedTags({ tags, onTagClick }) {
   return (
     <div className="flex flex-wrap items-center gap-2 text-sm">
       <span className="text-text-secondary-light dark:text-text-secondary-dark font-medium mr-1">
-        Trending:
+        Recommended:
       </span>
       {tags.map((tag) => (
         <button

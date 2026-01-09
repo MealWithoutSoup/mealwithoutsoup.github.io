@@ -90,7 +90,7 @@ src/
 │   │   └── AdminHeader.jsx         # Admin header (logout)
 │   ├── auth/
 │   │   └── ProtectedRoute.jsx      # Auth guard wrapper
-│   ├── ui/Icon, ThemeToggle, Tag, SearchBar, TrendingTags, Accordion, Breadcrumb
+│   ├── ui/Icon, ThemeToggle, Tag, SearchBar, RecommendedTags, Accordion, Breadcrumb
 │   ├── cards/FeaturedCard, ProjectCard, LabCard
 │   └── project/ChallengeSection, ProblemSolutionResult, MermaidDiagram
 ├── pages/
@@ -143,12 +143,13 @@ CREATE TABLE projects (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title TEXT NOT NULL,
     category TEXT DEFAULT 'projects',      -- featured, projects, labs
-    proj_description TEXT,
+    proj_description TEXT,                 -- 프로젝트 설명
+    proj_url TEXT,                         -- 프로젝트 url (github등)
     project_status TEXT DEFAULT 'draft',   -- draft, published
     proj_cover_image_url TEXT,             -- 커버 이미지 URL
     visibility BOOLEAN DEFAULT false,      -- 공개 여부
-    start_date VARCHAR(7) NOT NULL,        -- YYYY.MM 형식
-    end_date VARCHAR(7),                   -- NULL = 진행 중
+    start_date DATE NOT NULL,        -- YYYY.MM 형식
+    end_date DATE,                   -- NULL = 진행 중
     tags TEXT[] DEFAULT '{}',
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()

@@ -4,7 +4,7 @@ import { useProjects } from '../hooks/useProjects'
 import { useDebounce } from '../hooks/useDebounce'
 import { Header } from '../components/layout/Header'
 import { SearchBar } from '../components/ui/SearchBar'
-import { TrendingTags } from '../components/ui/TrendingTags'
+import { RecommendedTags } from '../components/ui/RecommendedTags'
 import { Accordion } from '../components/ui/Accordion'
 import { Icon } from '../components/ui/Icon'
 import { FeaturedCard } from '../components/cards/FeaturedCard'
@@ -12,7 +12,7 @@ import { ProjectCard } from '../components/cards/ProjectCard'
 import { LabCard } from '../components/cards/LabCard'
 import { Footer } from '../components/layout/Footer'
 
-const TRENDING_TAGS = ['React', 'TypeScript', 'Design Systems', 'D3.js', 'UI/UX']
+const RECOMMENDED_TAGS = ['Langgraph', 'FastAPI', 'React', 'Docker']
 
 const PROJECT_ICONS = ['dataset', 'palette', 'shopping_cart', 'code', 'memory', 'cloud']
 const PROJECT_COLORS = ['blue', 'purple', 'orange', 'green', 'red', 'blue']
@@ -63,8 +63,6 @@ export function MainPage() {
     [labs, searchQuery]
   )
 
-  // 전체 결과 수
-  const totalResults = filteredFeatured.length + filteredProjects.length + filteredLabs.length
   const isSearching = searchQuery.trim().length > 0
 
   const handleTagClick = (tag) => {
@@ -83,7 +81,7 @@ export function MainPage() {
             onChange={setSearchQuery}
             placeholder="Search projects, labs, or technologies..."
           />
-          <TrendingTags tags={TRENDING_TAGS} onTagClick={handleTagClick} />
+          <RecommendedTags tags={RECOMMENDED_TAGS} onTagClick={handleTagClick} />
         </section>
 
         {/* Featured Work Section */}
@@ -119,7 +117,7 @@ export function MainPage() {
 
         {/* Projects Accordion */}
         <section id="projects" className="scroll-mt-20">
-        <Accordion title="Projects" icon="folder_open">
+        <Accordion title={`Projects (${filteredProjects.length})`} icon="folder_open">
           {projectsLoading ? (
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
@@ -150,7 +148,7 @@ export function MainPage() {
 
         {/* Labs Accordion */}
         <section id="labs" className="scroll-mt-20">
-        <Accordion title="Labs & Playground" icon="science">
+        <Accordion title={`Labs & Playground (${filteredLabs.length})`} icon="science">
           {labsLoading ? (
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />

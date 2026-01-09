@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { Icon } from '../components/ui/Icon'
+import { AdminHeader } from '../components/layout/AdminHeader'
+import { Footer } from '../components/layout/Footer'
 
 export function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -30,22 +32,7 @@ export function AdminLogin() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background-light dark:bg-background-dark">
-      {/* Header */}
-      <header className="w-full bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Icon name="shield" className="text-white text-lg" />
-            </div>
-            <span className="font-bold text-text-primary-light dark:text-text-primary-dark">
-              Admin Console
-            </span>
-          </div>
-          <button className="text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors">
-            Help
-          </button>
-        </div>
-      </header>
+      <AdminHeader showLogout={false} />
 
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center px-4 py-12">
@@ -53,12 +40,9 @@ export function AdminLogin() {
           <div className="bg-card-light dark:bg-card-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark p-8">
             {/* Title */}
             <h1 className="text-2xl font-bold text-text-primary-light dark:text-text-primary-dark mb-2">
-              Welcome Back
+              관리자 로그인
             </h1>
-            <p className="text-text-secondary-light dark:text-text-secondary-dark mb-8">
-              Enter your credentials to access the portfolio admin dashboard.
-            </p>
-
+            <br/>
             {/* Error Message */}
             {error && (
               <div className="mb-6 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
@@ -115,12 +99,14 @@ export function AdminLogin() {
 
               {/* Forgot Password Link */}
               <div className="text-right">
-                <button
-                  type="button"
+                <a
+                  href="https://supabase.com/dashboard"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm text-primary hover:underline"
                 >
                   Forgot Password?
-                </button>
+                </a>
               </div>
 
               {/* Submit Button */}
@@ -139,19 +125,11 @@ export function AdminLogin() {
                 )}
               </button>
             </form>
-
-            {/* Footer */}
-            <p className="mt-6 text-center text-sm text-text-secondary-light dark:text-text-secondary-dark">
-              Restricted Access. Authorized personnel only.
-            </p>
           </div>
         </div>
       </main>
 
-      {/* Page Footer */}
-      <footer className="py-6 text-center text-sm text-text-secondary-light dark:text-text-secondary-dark">
-        © 2024 Portfolio Admin System. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   )
 }

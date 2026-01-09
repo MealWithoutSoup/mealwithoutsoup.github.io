@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../config/supabase'
 import { AdminHeader } from '../components/layout/AdminHeader'
+import { Footer } from '../components/layout/Footer'
 import { Icon } from '../components/ui/Icon'
 
 const STATUS_COLORS = {
@@ -168,9 +169,8 @@ export function AdminProjects() {
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '-'
-    const [year, month] = dateStr.split('.')
-    const date = new Date(parseInt(year), parseInt(month) - 1)
-    return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
   }
 
   const getTagColor = (tag) => TAG_COLORS[tag] || TAG_COLORS.default
@@ -547,6 +547,8 @@ export function AdminProjects() {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   )
 }

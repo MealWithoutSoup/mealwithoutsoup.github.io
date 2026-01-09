@@ -2,9 +2,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { label: 'GitHub', href: '#' },
-    { label: 'LinkedIn', href: '#' },
-    { label: 'Email', href: '#' },
+    { label: 'GitHub', href: 'https://github.com/MealWithoutSoup' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/jaehong-kim-1b706b26b' },
+    { label: 'Email', href: 'mailto:asdr111324@gmail.com' },
   ]
 
   return (

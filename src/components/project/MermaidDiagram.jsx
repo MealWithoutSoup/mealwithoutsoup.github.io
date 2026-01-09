@@ -1,17 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import mermaid from 'mermaid'
-
-// Initialize mermaid with config
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'neutral',
-  securityLevel: 'loose',
-  fontFamily: 'Inter, sans-serif',
-})
 
 export function MermaidDiagram({ syntax, imageUrl, caption }) {
   const containerRef = useRef(null)
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!syntax || !containerRef.current) return
@@ -19,6 +11,18 @@ export function MermaidDiagram({ syntax, imageUrl, caption }) {
     const renderDiagram = async () => {
       try {
         setError(null)
+        setLoading(true)
+
+        // 동적 import - 필요할 때만 mermaid 로드
+        const { default: mermaid } = await import('mermaid')
+
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'neutral',
+          securityLevel: 'loose',
+          fontFamily: 'Inter, sans-serif',
+        })
+
         const id = `mermaid-${Date.now()}`
         const { svg } = await mermaid.render(id, syntax)
         if (containerRef.current) {
@@ -27,6 +31,8 @@ export function MermaidDiagram({ syntax, imageUrl, caption }) {
       } catch (err) {
         console.error('Mermaid rendering error:', err)
         setError('Failed to render diagram')
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -60,6 +66,10 @@ export function MermaidDiagram({ syntax, imageUrl, caption }) {
         <div className="bg-card-light dark:bg-card-dark rounded-lg border border-border-light dark:border-border-dark p-4 overflow-x-auto">
           {error ? (
             <div className="text-red-500 text-sm">{error}</div>
+          ) : loading ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+            </div>
           ) : (
             <div ref={containerRef} className="flex justify-center" />
           )}

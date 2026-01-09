@@ -41,6 +41,8 @@ export function AdminProjectForm() {
     category: 'projects',
     project_status: 'draft',
     proj_cover_image_url: '',
+    proj_description: '',
+    proj_url: '',
     start_date: '',
     end_date: '',
     tags: [],
@@ -67,6 +69,8 @@ export function AdminProjectForm() {
         category: projectData.category || 'projects',
         project_status: projectData.project_status || 'draft',
         proj_cover_image_url: projectData.proj_cover_image_url || '',
+        proj_description: projectData.proj_description || '',
+        proj_url: projectData.proj_url || '',
         start_date: projectData.start_date || '',
         end_date: projectData.end_date || '',
         tags: projectData.tags || [],
@@ -286,6 +290,8 @@ export function AdminProjectForm() {
             category: project.category,
             project_status: project.project_status,
             proj_cover_image_url: project.proj_cover_image_url || null,
+            proj_description: project.proj_description || null,
+            proj_url: project.proj_url || null,
             start_date: project.start_date,
             end_date: project.end_date || null,
             tags: project.tags,
@@ -302,6 +308,8 @@ export function AdminProjectForm() {
             category: project.category,
             project_status: project.project_status,
             proj_cover_image_url: project.proj_cover_image_url || null,
+            proj_description: project.proj_description || null,
+            proj_url: project.proj_url || null,
             start_date: project.start_date,
             end_date: project.end_date || null,
             tags: project.tags,
@@ -488,28 +496,57 @@ export function AdminProjectForm() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-primary-light dark:text-text-primary-dark mb-2">
-                    Start Date (YYYY.MM)
+                    Start Date
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     value={project.start_date}
                     onChange={(e) => handleProjectChange('start_date', e.target.value)}
-                    placeholder="2024.01"
-                    className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark placeholder-text-secondary-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-primary-light dark:text-text-primary-dark mb-2">
-                    End Date (YYYY.MM)
+                    End Date
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     value={project.end_date}
                     onChange={(e) => handleProjectChange('end_date', e.target.value)}
-                    placeholder="2024.12 (leave empty if ongoing)"
-                    className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark placeholder-text-secondary-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                   />
+                  <p className="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-1">
+                    진행 중이면 비워두세요
+                  </p>
                 </div>
+              </div>
+
+              {/* Project Description */}
+              <div>
+                <label className="block text-sm font-medium text-text-primary-light dark:text-text-primary-dark mb-2">
+                  프로젝트 설명
+                </label>
+                <textarea
+                  value={project.proj_description}
+                  onChange={(e) => handleProjectChange('proj_description', e.target.value)}
+                  placeholder="프로젝트에 대한 간단한 설명을 입력하세요"
+                  rows={3}
+                  className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark placeholder-text-secondary-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                />
+              </div>
+
+              {/* Project URL */}
+              <div>
+                <label className="block text-sm font-medium text-text-primary-light dark:text-text-primary-dark mb-2">
+                  프로젝트 URL
+                </label>
+                <input
+                  type="url"
+                  value={project.proj_url}
+                  onChange={(e) => handleProjectChange('proj_url', e.target.value)}
+                  placeholder="https://github.com/..."
+                  className="w-full px-4 py-3 border border-border-light dark:border-border-dark rounded-lg bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark placeholder-text-secondary-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                />
               </div>
 
               {/* Tech Stack / Tags */}

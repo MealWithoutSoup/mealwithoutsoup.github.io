@@ -5,10 +5,16 @@ export function FeaturedCard({ project }) {
   const { id, title, description, thumbnail_url, proj_cover_image_url, tags = [] } = project
   const imageUrl = proj_cover_image_url || thumbnail_url
 
-  // Format date range
+  // Format date
+  const formatDate = (dateStr) => {
+    if (!dateStr) return ''
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' })
+  }
+
   const dateRange = project.end_date
-    ? `${project.start_date} - ${project.end_date}`
-    : `${project.start_date} - Present`
+    ? `${formatDate(project.start_date)} - ${formatDate(project.end_date)}`
+    : `${formatDate(project.start_date)} - Present`
 
   return (
     <Link to={`/project/${id}`}>

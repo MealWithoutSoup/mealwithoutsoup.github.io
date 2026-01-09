@@ -50,9 +50,16 @@ export function ProjectDetailPage() {
   }
 
   const currentChallenge = challenges[currentChallengeIndex]
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return ''
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })
+  }
+
   const dateRange = project.end_date
-    ? `${project.start_date} - ${project.end_date}`
-    : `${project.start_date} - Present`
+    ? `${formatDate(project.start_date)} - ${formatDate(project.end_date)}`
+    : `${formatDate(project.start_date)} - Present`
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -85,10 +92,25 @@ export function ProjectDetailPage() {
             {project.title}
           </h1>
 
-          {project.description && (
-            <p className="text-lg text-text-secondary-light dark:text-text-secondary-dark leading-relaxed mb-6">
-              {project.description}
+          {/* 프로젝트 설명 */}
+          {project.proj_description && (
+            <p className="text-lg text-text-secondary-light dark:text-text-secondary-dark leading-relaxed mb-6 whitespace-pre-line">
+              {project.proj_description}
             </p>
+          )}
+
+          {/* 프로젝트 링크 */}
+          {project.proj_url && (
+            <a
+              href={project.proj_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
+            >
+              <Icon name="link" className="text-lg" />
+              프로젝트 보기
+              <Icon name="open_in_new" className="text-sm" />
+            </a>
           )}
 
           {/* Tags */}
