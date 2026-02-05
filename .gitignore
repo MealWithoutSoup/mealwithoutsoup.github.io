@@ -27,4 +27,5 @@ lerna-debug.log*
 .env
 
 # claude
-/.claude
+.claude/
+.claude/settings.local.json
