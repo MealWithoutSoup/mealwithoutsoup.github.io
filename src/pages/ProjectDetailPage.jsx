@@ -14,6 +14,7 @@ export function ProjectDetailPage() {
   const { id } = useParams()
   const { project, challenges, loading, error } = useProjectDetail(id)
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0)
+  const [showCoverImage, setShowCoverImage] = useState(false)
 
   if (loading) {
     return (
@@ -61,9 +62,14 @@ export function ProjectDetailPage() {
     ? `${formatDate(project.start_date)} - ${formatDate(project.end_date)}`
     : `${formatDate(project.start_date)} - Present`
 
+  const categoryLabel = project.category
+    ? project.category.charAt(0).toUpperCase() + project.category.slice(1)
+    : 'Projects'
+  const categoryHash = project.category || 'projects'
+
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: project.category || 'Projects', href: '/' },
+    { label: categoryLabel, href: `/#${categoryHash}` },
     { label: project.title },
   ]
 
@@ -83,6 +89,10 @@ export function ProjectDetailPage() {
             <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
               {project.category || 'Project'}
             </span>
+            <span className="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+              <Icon name="visibility" className="text-base" />
+              {project.view_count || 0}
+            </span>
             <span className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
               {dateRange}
             </span>
@@ -91,6 +101,29 @@ export function ProjectDetailPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-text-primary-light dark:text-text-primary-dark mb-4">
             {project.title}
           </h1>
+
+          {/* 커버 이미지 토글 */}
+          {project.proj_cover_image_url && (
+            <div className="mb-6">
+              <button
+                onClick={() => setShowCoverImage(!showCoverImage)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-neu-light dark:bg-neu-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors"
+              >
+                <Icon name={showCoverImage ? 'visibility_off' : 'visibility'} className="text-lg" />
+                {showCoverImage ? '커버 이미지 숨기기' : '커버 이미지 보기'}
+              </button>
+
+              {showCoverImage && (
+                <div className="mt-4 neumorphic-inset aspect-video max-w-2xl rounded-xl overflow-hidden">
+                  <img
+                    src={project.proj_cover_image_url}
+                    alt={project.title}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+            </div>
+          )}
 
           {/* 프로젝트 설명 */}
           {project.proj_description && (

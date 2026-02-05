@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useLocation } from 'react-router-dom'
 import { useProjects } from '../hooks/useProjects'
 import { useDebounce } from '../hooks/useDebounce'
 import { Header } from '../components/layout/Header'
@@ -35,10 +35,36 @@ export function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const debouncedQuery = useDebounce(searchQuery, 300)
+  const location = useLocation()
+
+  // 아코디언 상태 관리 (기본: featured 열림)
+  const [openAccordion, setOpenAccordion] = useState('featured')
 
   const { projects: featuredProjects, loading: featuredLoading } = useProjects('featured')
   const { projects: projects, loading: projectsLoading } = useProjects('projects')
   const { projects: labs, loading: labsLoading } = useProjects('labs')
+
+  // 해시 변화 감지하여 아코디언 제어 + 스크롤
+  useEffect(() => {
+    const hash = location.hash.replace('#', '')
+    if (hash === 'featured') {
+      setOpenAccordion('featured')
+    } else if (hash === 'projects') {
+      setOpenAccordion('projects')
+    } else if (hash === 'labs') {
+      setOpenAccordion('labs')
+    }
+
+    // 해당 섹션으로 스크롤
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [location.hash])
 
   // URL 동기화 (디바운스된 값 사용)
   useEffect(() => {
@@ -65,6 +91,12 @@ export function MainPage() {
 
   const isSearching = searchQuery.trim().length > 0
 
+  // 검색 자동완성용 전체 결과
+  const allFilteredResults = useMemo(
+    () => [...filteredFeatured, ...filteredProjects, ...filteredLabs],
+    [filteredFeatured, filteredProjects, filteredLabs]
+  )
+
   const handleTagClick = (tag) => {
     setSearchQuery(tag)
   }
@@ -80,44 +112,50 @@ export function MainPage() {
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder="Search projects, labs, or technologies..."
+            suggestions={isSearching ? allFilteredResults : []}
           />
           <RecommendedTags tags={RECOMMENDED_TAGS} onTagClick={handleTagClick} />
         </section>
 
         {/* Featured Work Section */}
-        <section id="featured" className="flex flex-col gap-8 scroll-mt-20">
-          <div className="flex items-center gap-3 pb-2 border-b border-border-light dark:border-border-dark">
-            <Icon name="star" className="text-primary" />
-            <h2 className="text-2xl font-bold text-text-primary-light dark:text-text-primary-dark">
-              Featured Work
-            </h2>
-          </div>
-
-          {featuredLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
-            </div>
-          ) : filteredFeatured.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {filteredFeatured.map((project) => (
-                <FeaturedCard key={project.id} project={project} />
-              ))}
-            </div>
-          ) : isSearching ? (
-            <div className="flex flex-col items-center py-12 text-text-secondary-light dark:text-text-secondary-dark">
-              <Icon name="search_off" className="text-5xl mb-3" />
-              <p>"{searchQuery}"에 대한 Featured 검색 결과가 없습니다</p>
-            </div>
-          ) : (
-            <p className="text-text-secondary-light dark:text-text-secondary-dark text-center py-8">
-              No featured projects yet.
-            </p>
-          )}
+        <section id="featured" className="scroll-mt-20">
+          <Accordion
+            title={`Featured Work (${filteredFeatured.length})`}
+            icon="star"
+            isOpen={openAccordion === 'featured'}
+            onToggle={() => setOpenAccordion(openAccordion === 'featured' ? null : 'featured')}
+          >
+            {featuredLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
+              </div>
+            ) : filteredFeatured.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {filteredFeatured.map((project) => (
+                  <FeaturedCard key={project.id} project={project} />
+                ))}
+              </div>
+            ) : isSearching ? (
+              <div className="flex flex-col items-center py-12 text-text-secondary-light dark:text-text-secondary-dark">
+                <Icon name="search_off" className="text-5xl mb-3" />
+                <p>"{searchQuery}"에 대한 Featured 검색 결과가 없습니다</p>
+              </div>
+            ) : (
+              <p className="text-text-secondary-light dark:text-text-secondary-dark text-center py-8">
+                No featured projects yet.
+              </p>
+            )}
+          </Accordion>
         </section>
 
         {/* Projects Accordion */}
         <section id="projects" className="scroll-mt-20">
-        <Accordion title={`Projects (${filteredProjects.length})`} icon="folder_open">
+        <Accordion
+          title={`Projects (${filteredProjects.length})`}
+          icon="folder_open"
+          isOpen={openAccordion === 'projects'}
+          onToggle={() => setOpenAccordion(openAccordion === 'projects' ? null : 'projects')}
+        >
           {projectsLoading ? (
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
@@ -148,7 +186,12 @@ export function MainPage() {
 
         {/* Labs Accordion */}
         <section id="labs" className="scroll-mt-20">
-        <Accordion title={`Labs & Playground (${filteredLabs.length})`} icon="science">
+        <Accordion
+          title={`Labs & Playground (${filteredLabs.length})`}
+          icon="science"
+          isOpen={openAccordion === 'labs'}
+          onToggle={() => setOpenAccordion(openAccordion === 'labs' ? null : 'labs')}
+        >
           {labsLoading ? (
             <div className="flex items-center justify-center py-8">
               <Icon name="progress_activity" className="text-primary animate-spin text-3xl" />
