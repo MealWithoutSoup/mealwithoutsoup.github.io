@@ -1,6 +1,52 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../config/supabase'
 
+// 조회수 증가 함수 (세션 기반 중복 방지)
+async function incrementViewCount(projectId) {
+  const viewedKey = `viewed-${projectId}`
+
+  // 이미 이 세션에서 본 프로젝트인지 확인
+  if (sessionStorage.getItem(viewedKey)) {
+    return
+  }
+
+  // 즉시 세션에 기록하여 중복 호출 방지 (React Strict Mode 대응)
+  sessionStorage.setItem(viewedKey, 'true')
+
+  try {
+    // RPC 함수 호출 (race condition 방지)
+    const { error } = await supabase.rpc('increment_view_count', {
+      project_id: projectId
+    })
+
+    if (error) {
+      // RPC 함수가 없는 경우 직접 업데이트 시도
+      if (error.code === 'PGRST202') {
+        const { error: updateError } = await supabase
+          .from('projects')
+          .update({ view_count: supabase.rpc('view_count + 1') })
+          .eq('id', projectId)
+
+        if (updateError) {
+          console.error('Error incrementing view count:', updateError)
+          // 실패 시 sessionStorage 롤백
+          sessionStorage.removeItem(viewedKey)
+          return
+        }
+      } else {
+        console.error('Error calling increment_view_count:', error)
+        // 실패 시 sessionStorage 롤백
+        sessionStorage.removeItem(viewedKey)
+        return
+      }
+    }
+  } catch (err) {
+    console.error('Error incrementing view count:', err)
+    // 실패 시 sessionStorage 롤백
+    sessionStorage.removeItem(viewedKey)
+  }
+}
+
 export function useProjectDetail(projectId) {
   const [project, setProject] = useState(null)
   const [challenges, setChallenges] = useState([])
@@ -49,6 +95,9 @@ export function useProjectDetail(projectId) {
             (a, b) => a.display_order - b.display_order
           )
           setChallenges(sortedChallenges)
+
+          // 조회수 증가 (데이터 로드 성공 후)
+          incrementViewCount(projectId)
         }
       } catch (err) {
         console.error('Error fetching project detail:', err)

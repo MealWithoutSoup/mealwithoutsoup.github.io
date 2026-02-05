@@ -1,9 +1,30 @@
+import { useRef, useEffect } from 'react'
 import { Icon } from './Icon'
 
-export function Accordion({ title, icon, children, defaultOpen = false }) {
+export function Accordion({ title, icon, children, defaultOpen = false, isOpen, onToggle }) {
+  const detailsRef = useRef(null)
+
+  // 외부에서 isOpen이 제어될 때 details 상태 동기화
+  useEffect(() => {
+    if (isOpen !== undefined && detailsRef.current) {
+      detailsRef.current.open = isOpen
+    }
+  }, [isOpen])
+
+  const handleToggle = (e) => {
+    if (onToggle) {
+      e.preventDefault()
+      onToggle()
+    }
+  }
+
   return (
-    <details className="group/accordion" open={defaultOpen}>
-      <summary className="list-none cursor-pointer">
+    <details
+      ref={detailsRef}
+      className="group/accordion"
+      open={isOpen !== undefined ? isOpen : defaultOpen}
+    >
+      <summary className="list-none cursor-pointer" onClick={handleToggle}>
         <div className="flex items-center justify-between pb-2 border-b border-border-light dark:border-border-dark hover:border-primary/50 transition-colors">
           <div className="flex items-center gap-3">
             <Icon
@@ -20,8 +41,13 @@ export function Accordion({ title, icon, children, defaultOpen = false }) {
           />
         </div>
       </summary>
-      <div className="pt-8">
-        {children}
+      {/* 애니메이션 래퍼 */}
+      <div className="grid grid-rows-[0fr] group-open/accordion:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+        <div className="overflow-hidden">
+          <div className="pt-8">
+            {children}
+          </div>
+        </div>
       </div>
     </details>
   )

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { Icon } from '../ui/Icon'
 
@@ -26,20 +27,29 @@ export function AdminHeader({ showLogout = true }) {
         </div>
 
         {/* Right Side */}
-        {showLogout && user ? (
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-              {user.email}
-            </span>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors"
-            >
-              <Icon name="logout" />
-              Logout
-            </button>
-          </div>
-        ) : null}
+        <div className="flex items-center gap-4">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors"
+          >
+            <Icon name="home" />
+            메인페이지
+          </Link>
+          {showLogout && user && (
+            <>
+              <span className="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+                {user.email}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-sm text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors"
+              >
+                <Icon name="logout" />
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   )

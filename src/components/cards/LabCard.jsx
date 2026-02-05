@@ -2,14 +2,21 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../ui/Icon'
 
 export function LabCard({ project, icon = 'science' }) {
-  const { id, title, description } = project
+  const { id, title, description, proj_cover_image_url } = project
 
   return (
     <Link to={`/project/${id}`} className="block">
       <div className="neumorphic-card rounded-2xl p-4">
-        {/* Icon Area */}
-        <div className="neumorphic-inset h-20 rounded-xl mb-3 flex items-center justify-center">
-          <Icon name={icon} className="text-3xl text-primary" />
+        {/* Image/Icon Area */}
+        <div className="neumorphic-inset aspect-[4/3] w-full rounded-xl overflow-hidden mb-3 flex items-center justify-center">
+          {proj_cover_image_url ? (
+            <div
+              className="w-full h-full bg-contain bg-center bg-no-repeat hover:scale-105 transition-transform duration-500"
+              style={{ backgroundImage: `url('${proj_cover_image_url}')` }}
+            />
+          ) : (
+            <Icon name={icon} className="text-3xl text-primary" />
+          )}
         </div>
 
         {/* Content */}

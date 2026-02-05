@@ -2,26 +2,42 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../ui/Icon'
 
 export function ProjectCard({ project, icon = 'folder' }) {
-  const { id, title, description, tags = [] } = project
+  const { id, title, description, proj_cover_image_url, tags = [], start_date, end_date } = project
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return ''
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' })
+  }
+
+  const dateRange = end_date
+    ? `${formatDate(start_date)} - ${formatDate(end_date)}`
+    : `${formatDate(start_date)} - Present`
 
   return (
     <Link to={`/project/${id}`} className="block">
-      <div className="neumorphic-card rounded-2xl p-5 h-full">
-        {/* Icon Area */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="neumorphic-inset p-3 rounded-xl">
-            <Icon name={icon} className="text-[24px] text-primary" />
-          </div>
-          <Icon
-            name="arrow_forward"
-            className="text-text-secondary-light dark:text-text-secondary-dark opacity-50 group-hover:opacity-100 transition-opacity text-[20px]"
-          />
+      <div className="neumorphic-card rounded-2xl p-4 h-full">
+        {/* Image/Icon Area */}
+        <div className="neumorphic-inset aspect-[4/3] w-full rounded-xl overflow-hidden mb-4 flex items-center justify-center">
+          {proj_cover_image_url ? (
+            <div
+              className="w-full h-full bg-contain bg-center bg-no-repeat hover:scale-105 transition-transform duration-500"
+              style={{ backgroundImage: `url('${proj_cover_image_url}')` }}
+            />
+          ) : (
+            <Icon name={icon} className="text-4xl text-primary" />
+          )}
         </div>
 
-        {/* Title */}
-        <h3 className="font-semibold text-lg text-text-primary-light dark:text-text-primary-dark mb-2">
+        {/* Title & Date */}
+        <h3 className="font-semibold text-lg text-text-primary-light dark:text-text-primary-dark mb-1">
           {title}
         </h3>
+        {start_date && (
+          <p className="text-xs text-text-secondary-light dark:text-text-secondary-dark mb-2">
+            {dateRange}
+          </p>
+        )}
 
         {/* Description */}
         {description && (
