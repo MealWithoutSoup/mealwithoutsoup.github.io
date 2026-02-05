@@ -226,6 +226,19 @@ export function AdminProjectForm() {
     setChallenges((prev) => prev.filter((_, i) => i !== index))
   }
 
+  const handleMoveChallenge = (index, direction) => {
+    const newIndex = index + direction
+    if (newIndex < 0 || newIndex >= challenges.length) return
+
+    setChallenges((prev) => {
+      const updated = [...prev]
+      const temp = updated[index]
+      updated[index] = updated[newIndex]
+      updated[newIndex] = temp
+      return updated
+    })
+  }
+
   const handleImageUpload = async (challengeIndex, file) => {
     if (!file) return
 
@@ -640,16 +653,50 @@ export function AdminProjectForm() {
                     핵심 기술적 챌린지 {challenges.length > 1 ? `#${challengeIndex + 1}` : ''}
                   </h2>
                 </div>
-                {challenges.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveChallenge(challengeIndex)}
-                    className="flex items-center gap-1 text-sm text-red-500 hover:text-red-600 transition-colors"
-                  >
-                    <Icon name="delete" />
-                    Delete Challenge
-                  </button>
-                )}
+                <div className="flex items-center gap-2">
+                  {/* 순서 변경 버튼 */}
+                  {challenges.length > 1 && (
+                    <div className="flex items-center gap-1 mr-2">
+                      <button
+                        type="button"
+                        onClick={() => handleMoveChallenge(challengeIndex, -1)}
+                        disabled={challengeIndex === 0}
+                        className={`p-1.5 rounded-lg border transition-colors ${
+                          challengeIndex === 0
+                            ? 'border-border-light dark:border-border-dark text-border-light dark:text-border-dark cursor-not-allowed'
+                            : 'border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-primary hover:text-primary'
+                        }`}
+                        title="위로 이동"
+                      >
+                        <Icon name="keyboard_arrow_up" className="text-lg" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleMoveChallenge(challengeIndex, 1)}
+                        disabled={challengeIndex === challenges.length - 1}
+                        className={`p-1.5 rounded-lg border transition-colors ${
+                          challengeIndex === challenges.length - 1
+                            ? 'border-border-light dark:border-border-dark text-border-light dark:text-border-dark cursor-not-allowed'
+                            : 'border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:border-primary hover:text-primary'
+                        }`}
+                        title="아래로 이동"
+                      >
+                        <Icon name="keyboard_arrow_down" className="text-lg" />
+                      </button>
+                    </div>
+                  )}
+                  {/* 삭제 버튼 */}
+                  {challenges.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveChallenge(challengeIndex)}
+                      className="flex items-center gap-1 text-sm text-red-500 hover:text-red-600 transition-colors"
+                    >
+                      <Icon name="delete" />
+                      Delete
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Core Problem */}
